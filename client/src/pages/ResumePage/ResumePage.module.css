@@ -1,0 +1,203 @@
+
+.headerWrap{
+    background-image: url("../../resources/photos/bg.jpg");
+    padding-top:140px;
+    text-align: center;
+    background-position: center center;
+    min-height: 500px;
+    width: 100%;
+    background-size: cover;
+}
+.title{
+    font-family: "Raleway";
+    font-size: 80px;
+    color:white;
+
+}
+.container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.aboutMe{
+    font-family: "Raleway";
+    margin-top: 30px;
+    font-size: 20px;
+    color:white;
+}
+
+.intro,.contactIntro{
+    color: white;
+    background: #2c3e50;
+    padding: 60px 0px 60px 0px;
+}
+.aboutText{
+    font-size: 18px;
+    line-height: 28px;
+    font-family: 'Lato';
+    display: flex;
+}
+.aboutBox{
+    width: 16.6%;
+    margin-right: 8%;
+}
+
+.meBox{
+    padding: 0px 16px 0px 16px;
+    width: 50%;
+}
+.boxDownload{
+    width: 25%;
+}
+
+.education,.work,.contact{
+    padding-top: 50px;
+}
+.Grid {
+    display: grid;
+    width: 100%;
+    grid-template-areas:
+    'a b c'
+    'a d e';
+    grid-template-rows:75px 75px 1fr;
+    grid-template-columns:3fr 6fr 3fr ;
+     row-gap: 20px;
+}
+.educationText,.workText{
+    grid-area: a;
+}
+.educationType,.workType{
+    grid-area: b;
+    margin-left: 10px;
+}
+.educationGratuating,.workGratuating{
+    grid-area: c;
+}
+.raleway{
+    font-family: "Raleway";
+    font-weight: bold
+}
+.latoRegular{
+    font-family: 'Lato-Regular';
+    font-weight: 700;
+    color: #34495e;
+}
+.educationClass,.workClass{
+    grid-area: d;
+    margin-left: 10px;
+}
+.educationGratuatingTwo,.workGratuatingTwo{
+    grid-area: e;
+}
+.lato{
+    font-family: 'Lato';
+    line-height: 28px;
+}
+.latoItalic{
+    font-family: 'Lato';
+    line-height: 28px;
+    font-style: italic;
+}
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.flex{
+    display: flex;
+    column-gap: 15px;
+}
+
+.profileTitle,.skillsTitle{
+    font-family: 'Lato-Regular';
+    font-weight: 700;
+    color: white;
+}
+.profileText,.skillsText{
+    line-height: 2rem;
+    font-family: 'Lato';
+    font-size: 1.2rem;
+}
+.profileFullname,.profileBirthDate,.profileJob,.profileWebsite,.profileEmail{
+   margin-top: 20px;
+}
+.profile h3{
+    font-family: 'Lato-Regular';
+    font-weight: 700;
+    color: #e3ebf6;
+}
+
+.profile p {
+    font-family: 'Lato';
+    line-height: 28px;
+    margin-top: 5px;
+}
+
+.editableTypography{
+    color:white;
+    text-align: center;
+}
+.nameInput{
+    font-size: 80px;
+}
+.titleInput{
+    font-size: 20px;
+    width: 100%;
+}
+.aboutMeInput{
+    font-size: 18px;
+}
+.marginTop{
+    margin-top:40px;
+}
+.buttonEdit{
+    position: absolute;
+    top: 100px;
+    right: 150px;
+}
+.buttonsBox{
+    position: relative;
+}
+
+
+                                                       /* CSS */
+                                                    .button36 {
+                                                       background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+                                                       border-radius: 8px;
+                                                       border-style: none;
+                                                       box-sizing: border-box;
+                                                       color: #FFFFFF;
+                                                       cursor: pointer;
+                                                       flex-shrink: 0;
+                                                       font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+                                                       font-size: 16px;
+                                                       font-weight: 500;
+                                                       height: 4rem;
+                                                       padding: 0 1.6rem;
+                                                       text-align: center;
+                                                       text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+                                                       transition: all .5s;
+                                                       user-select: none;
+                                                       -webkit-user-select: none;
+                                                       touch-action: manipulation;
+                                                   }
+
+.button-6:hover {
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+    transition-duration: .1s;
+}
+
+@media (min-width: 768px) {
+    .button36 {
+        padding: 0 2.6rem;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}

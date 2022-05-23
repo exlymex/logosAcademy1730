@@ -1,0 +1,45 @@
+.navigation{
+    width: 100%;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+.navContent{
+    height: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    font-weight: 500;
+    font-size: 35px;
+    color: #7d2ae8;
+}
+.logo:hover{
+    text-decoration: none;
+}
+.navLinks{
+    display: flex;
+}
+.liLinks{
+    list-style: none;
+    text-decoration: none;
+    margin: 0 8px;
+}
+.liLinks:hover{
+    text-decoration: none;
+}
+.links{
+    text-decoration: none;
+    color: #0E2431;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 4px;
+    transition: all 0.3s ease;
+}
+.links:hover{
+    color: #7d2ae8;
+    text-decoration: none;
+}

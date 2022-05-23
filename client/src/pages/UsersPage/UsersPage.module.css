@@ -1,0 +1,7 @@
+.bodyContainer{
+    display: flex;
+    flex-wrap: wrap;
+    background: #7d2ae8;
+    min-height: 100vh;
+    margin:0px;
+}

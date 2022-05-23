@@ -1,0 +1,136 @@
+.forms{
+    height: 100%;
+    width: 100%;
+    background: #fff;
+}
+.form-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.login-form{
+    width: calc(100% / 2 - 25px);
+}
+.title{
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+}
+.title:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 25px;
+    background: #7d2ae8;
+}
+ .title:before{
+    width: 20px;
+}
+.input-boxes{
+    margin-top: 30px;
+}
+.input-box{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
+.rs-input,.rs-btn rs-btn-ghost rs-btn-violet{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+.rs-input:focus,
+.rs-input:valid{
+    border-color: #7d2ae8;
+}
+i{
+    position: absolute;
+    color: #7d2ae8;
+    font-size: 17px;
+    top:0px
+}
+.text{
+    font-size: 14px;
+    font-weight: 500;
+    /*color: #333;*/
+}
+ a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.button{
+    color: #fff;
+    margin-top: 40px;
+}
+.forms .form-content .button Button{
+    color: #fff;
+    background: #7d2ae8;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+.sign_up{
+    color: #5b13b9;
+    cursor: pointer;
+}
+.sign_up:hover{
+    text-decoration: underline;
+}
+.sign-up-text{
+    text-align: center;
+    margin-top: 25px;
+}
+.rs-form-control-label{
+    color: #626161;
+    font-size: 16px;
+    font-weight: 500;
+    padding:0px 30px ;
+}
+.rs-input-number-btn-group-vertical{
+    display: none;
+}
+.rs-form-group {
+    width: 100%;
+    height: 100%;
+}
+.rs-form-error-message-inner{
+color:#f44336;
+    font-size: 12px;
+}
+.rs-btn-violet:hover{
+                   background: #5b13b9;
+               }
+.rs-btn-violet{
+    height: 100%;
+    width: 100%;
+
+    outline: none;
+    border: none;
+    color: #fff;
+    background: #7d2ae8;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+}
+@media (max-width: 730px) {
+    .login-form{
+        width:100%
+    }
+}

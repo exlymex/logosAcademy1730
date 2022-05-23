@@ -1,0 +1,98 @@
+
+.formContent{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.loginForm{
+    width: calc(100% / 2 - 25px);
+}
+.title{
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+}
+.title:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 25px;
+    background: #7d2ae8;
+}
+ .title:before{
+    width: 20px;
+}
+.inputBoxes{
+    margin-top: 30px;
+}
+.inputBox{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+}
+
+/*input:focus,*/
+/*input:valid{*/
+/*    border-color: #7d2ae8;*/
+/*}*/
+i{
+    position: absolute;
+    color: #7d2ae8;
+    font-size: 17px;
+    top:0px
+}
+.text{
+    font-size: 14px;
+    font-weight: 500;
+}
+ a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.button{
+    color: #fff;
+    margin-top: 40px;
+}
+
+
+.signUp{
+    color: #5b13b9;
+    cursor: pointer;
+}
+.signUp:hover{
+    text-decoration: underline;
+}
+.signUpText{
+    text-align: center;
+    margin-top: 25px;
+}
+.rs-form-control-label{
+    color: #626161;
+    font-size: 16px;
+    font-weight: 500;
+    padding:0px 30px ;
+}
+.rs-input-number-btn-group-vertical{
+    display: none;
+}
+.rs-form-group {
+    width: 100%;
+    height: 100%;
+}
+.rs-form-error-message-inner{
+color:#f44336;
+    font-size: 12px;
+}
+@media (max-width: 730px) {
+    .login-form{
+        width:100%
+    }
+}
