@@ -3,21 +3,10 @@ import styles from './UserCard.module.css'
 import img from '../../../resources/photos/icons8-user-50.png'
 import {Link} from "react-router-dom";
 import {RouteConst} from "../../../common/RouteConst";
-import {followUser} from "../../../redux/reducers/usersReducer";
+import {followUser, unfollowUser} from "../../../redux/reducers/usersReducer";
 import {useDispatch} from "react-redux";
-const UserCard = ({user,following}) => {
+const UserCard = ({user,isFollowed}) => {
     const {username,_id} = user
-    const [followed,setFollowed] = useState(false)
-    useEffect(() => {
-        following.map(value => {
-            if(value === _id){
-                setFollowed(true)
-            }else{
-                setFollowed(false)
-            }
-        })
-    },[following])
-
     const dispatch = useDispatch()
     return (
               <div className={styles.cardContainer}>
@@ -27,9 +16,9 @@ const UserCard = ({user,following}) => {
                 <h6 className={styles.userTitle}>New York</h6>
                 <p className={styles.fontP}>User interface designer and <br/> front-end developer</p>
                 <div className={styles.userButtons}>
-                    {followed
+                    {isFollowed
                         ?
-                        <div className={styles.followingButton} onClick={() => dispatch(followUser(_id))}>
+                        <div className={styles.followingButton} onClick={() => dispatch(unfollowUser(_id))}>
                             unFollowing
                         </div>
                         :

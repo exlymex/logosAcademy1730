@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Routes,Navigate} from "react-router-dom";
 import {RouteConst} from "../common/RouteConst";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
-import MainPage from "../pages/MainPage/MainPage";
 import ResumePage from "../pages/ResumePage/ResumePage";
 import UsersPage from "../pages/UsersPage/UsersPage";
 
@@ -18,10 +17,9 @@ const Router = () => {
                     {<Header/>}
                     <Routes>
                         <Route path = {RouteConst.RESUME} element = {<ResumePage />} />
-                        <Route path = {RouteConst.MAIN} element = {<MainPage />} />
                         <Route path = {RouteConst.USERS} element = {<UsersPage />} />
-                        <Route path='/resume/:userId' element={<ResumePage/>}></Route>
-                        <Route path = {'*'} element = {<Navigate to={RouteConst.MAIN} />} />
+                        <Route path = {RouteConst.CARD} element={<ResumePage/>}></Route>
+                        <Route path = {'*'} element = {<Navigate to={RouteConst.RESUME} />} />
                         {/*<Route path = {RouteConst.REGISTRATION} element = {<RegistrationPage />} />*/}
                         {/*<Route path = {RouteConst.ADMIN} element = {<AdminPage />} />*/}
                     </Routes>

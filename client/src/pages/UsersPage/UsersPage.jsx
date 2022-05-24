@@ -7,16 +7,15 @@ import styles from "./UsersPage.module.css";
 const UsersPage = () => {
     const dispatch = useDispatch()
     const users = useSelector(state=>state.usersReducer.users)
-    const following = useSelector(state => state.usersReducer.following)
+    const followingArray = useSelector(state => state.usersReducer.following)
     useEffect(() => {
         dispatch(getUsers())
         dispatch(getFollows())
     },[])
-
-
+    const checkFollow = (user) => !!followingArray.find(u => u === user._id)
     return(
         <div className={styles.bodyContainer}>
-            {users.map(user =>  <UserCard key={user._id} user={user} followUser={followUser} following = {following} />)}
+            {users.map(user =>  <UserCard key={user._id} user={user} followUser={followUser} isFollowed = {checkFollow(user)}  />)}
         </div>
     )
 }

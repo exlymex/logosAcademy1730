@@ -13,6 +13,20 @@ export const usersReducer = (state = Initialstate,action) => {
         case actionsUsers.USERS_SET_FOLLOWING : {
             return {...state,following:action.payload}
         }
+        case actionsUsers.USERS_FOLLOW : {
+            if(state.following.includes(action.payload)){
+                return {...state}
+            }
+            return {...state,following:[...state.following,action.payload] }
+        }
+        case actionsUsers.USERS_UNFOLLOW : {
+            if(state.following.includes(action.payload)){
+                const copy = [...state.following]
+                copy.splice(copy.indexOf(action.payload),1)
+                return {...state,following:copy}
+            }
+            return {...state,following:[...state.following,action.payload] }
+        }
         default :
             return state
     }
@@ -31,8 +45,11 @@ export const getFollows = () => async(dispatch,getState) => {
 export const followUser = (id) => async(dispatch,getState) => {
     const {token} = getState().authReducer
     const response = await UsersAPI.followUser(token,id)
-    dispatch(usersActions.setFollowing(response.data))
-
+    if(response.status === 201) {
+        dispatch(usersActions.follow(id))
+    }
 }
-
+export const unfollowUser = (id) => async(dispatch,getState) => {
+    dispatch(usersActions.unfollow(id))
+}
 export default usersReducer

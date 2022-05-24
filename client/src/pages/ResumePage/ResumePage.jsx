@@ -5,8 +5,7 @@ import {usePrevious} from "../../hooks/usePrevious";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {getDetails, postDetails} from "../../redux/reducers/resumeReducer";
-import {toast} from "react-toastify";
-import {upload} from "@testing-library/user-event/dist/upload";
+
 
 const ResumePage = () => {
     const {userId} = useParams()
