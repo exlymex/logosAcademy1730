@@ -82,13 +82,23 @@ router.post('/details/post',authMiddleware,async (req,res) => {
 router.post('/follow',authMiddleware,async (req,res) => {
     try{
         const {id} = req.body
-        if(!id) {
+        if(!id || id === req.user.userId) {
             return res.status(400).json({
                 message: 'Помилка'
             })
         }
-        const user = await User.findOneAndUpdate({_id:req.user.userId},{$push:{following : id }})
-        res.status(201).json([...user.following])
+        const user = await User.findById(req.user.userId)
+        console.log(user.following.includes(id))
+        if(!user.following.includes(id)){
+            user.following = [...user.following,id]
+            await user.save()
+            return res.status(201).json([...user.following,id])
+        }
+        return res.status(400).json({
+            message: 'Помилка'
+        })
+        // const user = await User.findOneAndUpdate({_id:req.user.userId},{$push:{following : id }})
+
     }
         // ,{userImage:req.file.path} ,upload.single('userImage')
     catch(e){
