@@ -50,6 +50,11 @@ export const followUser = (id) => async(dispatch,getState) => {
     }
 }
 export const unfollowUser = (id) => async(dispatch,getState) => {
-    dispatch(usersActions.unfollow(id))
+    const {token} = getState().authReducer
+    const response = await UsersAPI.unfollowUser(token,id)
+    if(response.status === 201){
+        dispatch(usersActions.unfollow(id))
+    }
+
 }
 export default usersReducer

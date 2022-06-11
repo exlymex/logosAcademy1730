@@ -6,6 +6,8 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import ResumePage from "../pages/ResumePage/ResumePage";
 import UsersPage from "../pages/UsersPage/UsersPage";
+import SearchingPage from "../components/Searching/SearchingPage";
+import NotesPage from "../pages/Notes/Notes";
 
 const Router = () => {
     const {token} = useSelector(state => state.authReducer)
@@ -19,6 +21,7 @@ const Router = () => {
                         <Route path = {RouteConst.RESUME} element = {<ResumePage />} />
                         <Route path = {RouteConst.USERS} element = {<UsersPage />} />
                         <Route path = {RouteConst.CARD} element={<ResumePage/>}></Route>
+                        <Route path = {RouteConst.NOTES} element={<NotesPage/>}></Route>
                         <Route path = {'*'} element = {<Navigate to={RouteConst.RESUME} />} />
                         {/*<Route path = {RouteConst.REGISTRATION} element = {<RegistrationPage />} />*/}
                         {/*<Route path = {RouteConst.ADMIN} element = {<AdminPage />} />*/}

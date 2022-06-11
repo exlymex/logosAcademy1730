@@ -4,6 +4,8 @@ export const RouteConst = {
     ADMIN:'/admin',
     RESUME:'/resume',
     USERS:'/users',
+    SEARCH : '/search',
     REGISTRATION:'/registration',
-    CARD:'/resume/:userId'
+    CARD:'/resume/:userId',
+    NOTES:'/notes/'
 }

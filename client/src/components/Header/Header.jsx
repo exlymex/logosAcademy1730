@@ -15,18 +15,18 @@ const Header = () => {
         <nav className={styles.navigation}>
             <div className={styles.navContent}>
                 <div>
-                    <a className={styles.logo} >Lifeskylers</a>
+                    <a className={styles.logo} >Rmaking</a>
                 </div>
                 {isAuth ?
                     <ul className={styles.navLinks}>
-                        <Link to = {RouteConst.ADMIN} className={styles.liLinks}>
-                            <a className={styles.links}>Profile </a>
-                        </Link>
                         <Link to = {RouteConst.RESUME} className={styles.liLinks}>
                             <a className={styles.links} >Resume</a>
                         </Link>
                         <Link to = {RouteConst.USERS} className={styles.liLinks}>
                             <a className={styles.links} >Users</a>
+                        </Link>
+                        <Link to = {RouteConst.NOTES} className={styles.liLinks}>
+                            <a className={styles.links} >Notes</a>
                         </Link>
                         <Link to = {RouteConst.RESUME} className={styles.liLinks}>
                             <a className={styles.links} onClick={onLogout}>Logout</a>

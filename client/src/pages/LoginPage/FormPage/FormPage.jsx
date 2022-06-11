@@ -46,4 +46,5 @@ const FormPage = ({formValue, setFormValue, formError, setFormError, formRef, ha
         </div>
     )
 }
+
 export default FormPage

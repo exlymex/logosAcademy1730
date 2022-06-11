@@ -45,6 +45,13 @@ export const UsersAPI = {
             })
             .catch(e => e.response)
     },
+    postImage(token,formData) {
+        return instance.post('/api/user/image/post', formData, {headers: {Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data'}})
+            .then(response => {
+                return response
+            })
+            .catch(e => e.response)
+    },
     getFollows(token) {
         return instance.get('/api/user/follow/get', {headers: {Authorization: `Bearer ${token}`}})
             .then(response => {
@@ -54,6 +61,13 @@ export const UsersAPI = {
     },
     followUser(token, id) {
         return instance.post('/api/user/follow', {id}, {headers: {Authorization: `Bearer ${token}`}})
+            .then(response => {
+                return response
+            })
+            .catch(e => e.response)
+    },
+    unfollowUser(token, id) {
+        return instance.post('/api/user/unfollow', {id}, {headers: {Authorization: `Bearer ${token}`}})
             .then(response => {
                 return response
             })

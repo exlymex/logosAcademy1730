@@ -6,15 +6,20 @@ import {RouteConst} from "../../../common/RouteConst";
 import {followUser, unfollowUser} from "../../../redux/reducers/usersReducer";
 import {useDispatch} from "react-redux";
 const UserCard = ({user,isFollowed}) => {
-    const {username,_id} = user
+    const {username,_id,userImage,city,position} = user
     const dispatch = useDispatch()
     return (
               <div className={styles.cardContainer}>
-                <span className={styles.pro}>PRO</span>
-                <img className={styles.round} src="https://randomuser.me/api/portraits/women/79.jpg" alt="user"/>
+                  {userImage ?  <span className={styles.pro}>PRO</span> : <span className={styles.pro}>SIMPLE</span>}
+                  {userImage
+                      ?  <img className={styles.round} src={user.userImage} alt="user" />
+                      :  <img className={styles.round} src="https://png.pngtree.com/png-vector/20190728/ourlarge/pngtree-avatar-user-profile-flat-color-icon-vector-icon-banner-png-image_1619399.jpg" alt="user"/>
+                  }
+
+                {/*<img className={styles.round} src="https://randomuser.me/api/portraits/women/79.jpg" alt="user"/>*/}
                 <h3 className={styles.userName}>{username}</h3>
-                <h6 className={styles.userTitle}>New York</h6>
-                <p className={styles.fontP}>User interface designer and <br/> front-end developer</p>
+                <h6 className={styles.userTitle}>{city}</h6>
+                <p className={styles.fontP}>{position}</p>
                 <div className={styles.userButtons}>
                     {isFollowed
                         ?

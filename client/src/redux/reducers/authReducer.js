@@ -4,12 +4,11 @@ import {checkAPI, loginAPI, registerAPI, UsersAPI} from "../../api/api";
 
 const initialState = {
     isLoading: false,
-    name: '',
+    username: '',
     errorUsers: '',
     formError: '',
     token: null,
     userID: null,
-    isRegistrated: '',
     isFirstLoading: true
 }
 const setAuthAction = ({userID, token, username}) => {
@@ -73,6 +72,7 @@ export const registerUser = ({email, password, username}) => (dispatch) => {
             }
         })
 }
+
 export const loginUser = ({email, password}) => async (dispatch) => {
     dispatch(actionUsers.isLoading(true))
     await loginAPI.loginUsers({email, password})

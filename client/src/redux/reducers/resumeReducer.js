@@ -2,13 +2,11 @@
 import {actionsForResume, resumeAction} from "../actionsCreator/resumeCreator";
 import {UsersAPI} from "../../api/api";
 import {toast} from "react-toastify";
-import {actionUsers} from "../actionsCreator/authCreator";
+
 
 const initialState = {
     canSave:false,
-    email: '',
-    username : '',
-    name: '',
+    fullname: '',
     title: '',
     aboutMe: '',
     courses: '',
@@ -19,14 +17,13 @@ const initialState = {
     coursesNameSecond: '',
     coursesTimeSecond: '',
     coursesGratuationSecond: '',
-    photo: ''
+    userImage:null
 }
 
 
 export const resumeReducer = (state = initialState,action) => {
     switch(action.type){
         case actionsForResume.SET_DETAILS :
-            console.log(action.payload)
             return({
                 ...state,
                 ...action.payload
@@ -41,6 +38,11 @@ export const resumeReducer = (state = initialState,action) => {
                 ...state,
                 ...action.payload
             })
+        case actionsForResume.SET_USER_IMAGE :
+            return({
+                ...state,
+                userImage:action.payload
+            })
         default:
             return state
 
@@ -53,7 +55,6 @@ export const getDetails = (userId) => async (dispatch,getState) => {
 }
 export const postDetails = (userId,detail) => async (dispatch,getState) => {
     const {token} = getState().authReducer
-
     const response = await UsersAPI.postDetails(token,userId,detail)
     if(response.status === 400){
         toast.error(response.data.message, {
@@ -65,10 +66,14 @@ export const postDetails = (userId,detail) => async (dispatch,getState) => {
             draggable: true,
         });
     }else{
-        console.log(detail)
         dispatch(resumeAction.setValue(detail))
     }
 
+}
+export const postPhoto = (formData) => async(dispatch,getState) =>{
+    const {token} = getState().authReducer
+    const response = await UsersAPI.postImage(token,formData)
+    dispatch(resumeAction.setUserImage(response.data.userImage))
 }
 
 export default resumeReducer
