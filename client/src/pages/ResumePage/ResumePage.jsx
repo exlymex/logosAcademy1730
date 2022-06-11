@@ -4,7 +4,7 @@ import EditableTypography from "../../components/EditableTypography/EditableTypo
 import {usePrevious} from "../../hooks/usePrevious";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getDetails, postDetails} from "../../redux/reducers/resumeReducer";
+import {getDetails, postDetails, postPhoto} from "../../redux/reducers/resumeReducer";
 
 
 const ResumePage = () => {
@@ -21,25 +21,23 @@ const ResumePage = () => {
         }
 
     }, [userId])
-
+    useEffect(() => {
+        previous.update(details)
+    }, [details.name])
 
     const [edit, setEdit] = useState(false)
+    const [image,setImage] = useState(null)
 
     const previous = usePrevious(details)
-
     const changeTextHandler = (e) => {
         dispatch({type: 'CHANGE', payload: {...details, [e.target.name]: e.target.value}})
     }
-    const getUserPhoto = (e) => {
-        e.preventDefault()
-        const file = e.target[0].files[0]
-        if(!file) return;
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64 = reader.result;
-            console.log(base64)
-        }
-        reader.readAsDataURL(file);
+    const setUserPhoto = (event) => {
+        event.preventDefault()
+        const formData = new FormData();
+        formData.append("file",image);
+        dispatch(postPhoto(formData))
+
     }
     const toggle = () => {
         setEdit(!edit);
@@ -60,7 +58,6 @@ const ResumePage = () => {
                             <button onClick={() => save(details)}>Save</button>
                             <button onClick={cancel}>Cancel</button>
                         </>
-
                         :
                         <button className={`${styles.buttonEdit} ${styles.button36}`} onClick={toggle}>Edit</button>
                     : null
@@ -71,8 +68,8 @@ const ResumePage = () => {
                             <EditableTypography
                                 edit={edit}
                                 onChange={changeTextHandler}
-                                value={details.name}
-                                name={'name'}
+                                value={details.fullname}
+                                name={'fullname'}
                                 placeholder={'Name'}
                                 className={`${styles.editableTypography} ${styles.nameInput}`}
                             />
@@ -93,7 +90,7 @@ const ResumePage = () => {
                 <div className={styles.intro}>
                     <div className={styles.container}>
                         <div className={styles.aboutText}>
-                            <img src = {details.photo} />
+                            <img src = {details.photo} alt={''} />
                             <div className={styles.aboutBox}>
                                 <h5 className={styles.aboutText}>ABOUT</h5>
                             </div>
@@ -125,9 +122,9 @@ const ResumePage = () => {
                                 <EditableTypography
                                     edit={edit}
                                     onChange={changeTextHandler}
-                                    value={details.courses}
-                                    name={'courses'}
-                                    placeholder={'courses ended'}
+                                    value={details.coursesName}
+                                    name={'coursesName'}
+                                    placeholder={'courses name'}
                                     className={` ${styles.latoRegular}`}
                                 />
                             </div>
@@ -135,10 +132,10 @@ const ResumePage = () => {
                                 <EditableTypography
                                     edit={edit}
                                     onChange={changeTextHandler}
-                                    value={details.coursesName}
-                                    name={'coursesName'}
-                                    placeholder={'courses name'}
-                                    className={` ${styles.lato}`}
+                                    value={details.courses}
+                                    name={'courses'}
+                                    placeholder={'courses place'}
+                                    className={` ${ styles.lato}`}
                                 />
                             </div>
                             <div className={styles.latoItalic}>
@@ -169,19 +166,19 @@ const ResumePage = () => {
                                 <EditableTypography
                                     edit={edit}
                                     onChange={changeTextHandler}
-                                    value={details.coursesSecond}
-                                    name={'coursesSecond'}
-                                    placeholder={'courses ended'}
-                                    className={` ${styles.latoRegular} ${styles.marginTop}`}
+                                    value={details.coursesNameSecond}
+                                    name={'coursesNameSecond'}
+                                    placeholder={'courses name'}
+                                    className={`${styles.latoRegular} ${styles.marginTop} `}
                                 />
                             </div>
                             <div className={styles.lato}>
                                 <EditableTypography
                                     edit={edit}
                                     onChange={changeTextHandler}
-                                    value={details.coursesNameSecond}
-                                    name={'coursesNameSecond'}
-                                    placeholder={'courses name'}
+                                    value={details.coursesSecond}
+                                    name={'coursesSecond'}
+                                    placeholder={'courses place'}
                                     className={` ${styles.lato}`}
                                 />
                             </div>
@@ -191,14 +188,22 @@ const ResumePage = () => {
                                     onChange={changeTextHandler}
                                     value={details.coursesTimeSecond}
                                     name={'coursesTimeSecond'}
-                                    placeholder={'courses name'}
+                                    placeholder={'courses time'}
                                     className={` ${styles.latoItalic} `}
                                 />
                             </div>
 
                         </div>
-                        <div className={styles.educationGratuatingTwo}>
-                            <h4 className={styles.raleway}>Gratuation on 2022</h4>
+                        <div className={styles.raleway}>
+                            <EditableTypography
+                                edit={edit}
+                                onChange={changeTextHandler}
+                                value={details.coursesGratuationSecond}
+                                name={'coursesGratuationSecond'}
+                                placeholder={'courses gratuation'}
+                                className={` ${styles.raleway}`}
+                            />
+                            {/*<h4 className={styles.raleway}>Gratuation on 2022</h4>*/}
                         </div>
                     </div>
                     {!edit && <hr/>}
@@ -208,57 +213,196 @@ const ResumePage = () => {
                 <div className={styles.container}>
                     <div className={styles.Grid}>
                         <div className={styles.workText}>
-                            <h4 className={styles.raleway}>Education</h4>
+                            <h4 className={styles.raleway}>Work</h4>
                         </div>
                         <div className={styles.workType}>
-                            <h3 className={styles.latoRegular}>Master of Web Design</h3>
-                            <p className={styles.lato}>IT Step School</p>
-                            <p className={styles.latoItalic}>3 years Course</p>
+                            <div className={styles.latoRegular}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.job}
+                                    name={'job'}
+                                    placeholder={'job name'}
+                                    className={` ${styles.latoRegular} `}
+                                />
+                            </div>
+                            <div className={styles.lato}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.company}
+                                    name={'company'}
+                                    placeholder={'company name'}
+                                    className={` ${styles.lato}`}
+                                />
+                            </div>
+                            <div className={styles.latoItalic}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.companyExperience}
+                                    name={'companyExperience'}
+                                    placeholder={'company time'}
+                                    className={` ${styles.latoItalic} `}
+                                />
+                            </div>
                         </div>
                         <div className={styles.workGratuating}>
-                            <h4 className={styles.raleway}>Gratuation on 2018</h4>
+                            <div className={styles.raleway}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.companyTime}
+                                    name={'companyTime'}
+                                    placeholder={'time at Company'}
+                                    className={` ${styles.raleway}`}
+                                />
+                            </div>
                         </div>
                         <div className={styles.workClass}>
-                            <h3 className={styles.latoRegular}>Front-end developer</h3>
-                            <p className={styles.lato}>Logos IT Academy</p>
-                            <p className={styles.latoItalic}>6 month Course</p>
+                            <div className={styles.latoRegular}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.jobSecond}
+                                    name={'jobSecond'}
+                                    placeholder={'job name'}
+                                    className={` ${styles.latoRegular} ${styles.marginTop}`}
+                                />
+                            </div>
+                            <div className={styles.lato}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.companySecond}
+                                    name={'companySecond'}
+                                    placeholder={'company name'}
+                                    className={` ${styles.lato}`}
+                                />
+                            </div>
+                            <div className={styles.latoItalic}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.companyExperienceSecond}
+                                    name={'companyExperienceSecond'}
+                                    placeholder={'company time'}
+                                    className={` ${styles.latoItalic} `}
+                                />
+                            </div>
                         </div>
                         <div className={styles.workGratuatingTwo}>
-                            <h4 className={styles.raleway}>Gratuation on 2022</h4>
+                            <div className={styles.raleway}>
+                                <EditableTypography
+                                    edit={edit}
+                                    onChange={changeTextHandler}
+                                    value={details.companyTimeSecond}
+                                    name={'companyTimeSecond'}
+                                    placeholder={'time at company'}
+                                    className={` ${styles.raleway}`}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <hr/>
+                    {!edit && <hr/>}
                 </div>
             </section>
             <section className={styles.contact}>
                 <div className={styles.contactIntro}>
-                    <div className={`${styles.container} + ${styles.flex}`}>
+                    <div className={`${styles.container}  ${styles.flex}`}>
                         <div className={styles.profile}>
                             <div className={styles.profileText}>
                                 <h1 className={styles.profileTitle}>Profile</h1>
-                                <p className={styles.profileText}>Lorem ipsum Qui veniam ut consequat ex ullamco nulla
-                                    in non ut esse in magna sint minim officia consectetur nisi commodo ea magna
-                                    pariatur nisi cillum.</p>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.profile}
+                                        name={'profile'}
+                                        placeholder={'time at company'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+
+                                    />
+                                </div>
+
                             </div>
                             <div className={styles.profileFullname}>
                                 <h3>FULLNAME :</h3>
-                                <p>PAVLO BORYSOV</p>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.fullname}
+                                        name={'fullname'}
+                                        placeholder={'fullname'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+                                    />
+                                </div>
                             </div>
                             <div className={styles.profileBirthDate}>
-                                <h3>BIRTH DATE :</h3>
-                                <p>13.09.2003</p>
+                                <h3>Age :</h3>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.age}
+                                        name={'age'}
+                                        placeholder={'Your age'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+                                    />
+                                </div>
                             </div>
                             <div className={styles.profileJob}>
                                 <h3>JOB :</h3>
-                                <p>Freelancer</p>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.position}
+                                        name={'position'}
+                                        placeholder={'Your position'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+                                    />
+                                </div>
                             </div>
                             <div className={styles.profileWebsite}>
                                 <h3>Website :</h3>
-                                <p>www.website.com</p>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.website}
+                                        name={'website'}
+                                        placeholder={'Your github'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+                                    />
+                                </div>
                             </div>
                             <div className={styles.profileEmail}>
                                 <h3>EMAIL :</h3>
-                                <p>pavloborisov44@gmail.com</p>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.email}
+                                        name={'email'}
+                                        placeholder={'Your email'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.profileCity}>
+                                <h3>CITY :</h3>
+                                <div className={styles.profileText}>
+                                    <EditableTypography
+                                        edit={edit}
+                                        onChange={changeTextHandler}
+                                        value={details.city}
+                                        name={'city'}
+                                        placeholder={'Your city'}
+                                        className={` ${styles.profileText} ${styles.colorWhite}`}
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className={styles.skills}>
@@ -268,8 +412,13 @@ const ResumePage = () => {
                                 cillum.</p>
                         </div>
                         <div className={styles.mySkills}>
-                            <form onSubmit={getUserPhoto}>
-                                <input multiple={false} accept={'image/*'} type={'file'}/>
+
+                            <form onSubmit={ (event) => setUserPhoto(event)}>
+                                {!details.userImage || details.userImage === ''
+                                    ? <img src = 'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png' alt={''}/>
+                                    : <img src = {details.userImage} alt={''}   />
+                                }
+                                <input multiple={false}  name="image" accept={'image/*'} type={'file'} onChange={(event) => {setImage(event.target.files[0])}}/>
                                 <button type='submit'> Upload photo</button>
                             </form>
                         </div>

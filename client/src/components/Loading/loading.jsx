@@ -1,6 +1,6 @@
 
 import React from "react";
-import gif from '../../assets/photos/1483.gif'
+import gif from '../../assets/photos/1483.png'
 import styles from './loading.module.css'
 const Preloader = () => {
     return(

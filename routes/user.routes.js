@@ -34,7 +34,7 @@ const upload = multer({
 
 router.get('/users', authMiddleware,async (req, res) => {
     try {
-        const users = await User.find({},{username:1,email:1,userImage:1})
+        const users = await User.find({},{username:1,email:1,userImage:1,position:1,city:1,age:1})
         res.status(201).json({users})
     } catch (e) {
         res.status(500).json({
@@ -45,9 +45,7 @@ router.get('/users', authMiddleware,async (req, res) => {
 router.get('/details', authMiddleware,async (req, res) => {
     try {
         const {userId} = req.query
-        const user = await User.findById(userId,{ username:0,email:0,password:0})
-
-        user.userImage = `http://localhost:5000/uploads/${user.userImage}`
+        const user = await User.findById(userId,{ username:0,password:0})
         if(user){
             return res.status(201).json({user})
         }
@@ -83,7 +81,6 @@ router.get('/follow/get',authMiddleware,async (req,res) => {
         res.status(201).json([...user.following])
 
     }
-        // ,{userImage:req.file.path} ,upload.single('userImage')
     catch(e){
         res.status(500).json({
             message: 'Something went wrong, try again later'
@@ -146,12 +143,9 @@ router.post('/unfollow',authMiddleware,async (req,res) => {
 router.post('/image/post',[authMiddleware,upload.single('file')],async (req,res) => {
     try{
         const user = await User.findById(req.user.userId)
-        user.userImage = req.file.filename
+        user.userImage = `http://localhost:5000/uploads/${req.file.filename}`
         await user.save()
-        const obj = {
-            avatar:`http://localhost:5000/uploads/${user.userImage}`
-        }
-        return res.status(201).json(obj)
+        return res.status(201).json(user)
     }
     catch(e){
         res.status(500).json({

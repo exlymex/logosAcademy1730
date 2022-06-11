@@ -1,9 +1,7 @@
 import {useEffect, useRef} from "react";
 
 export const usePrevious = (value) => {
-
     const valueRef = useRef(null);
-
     useEffect(() => {
         update(value);
     }, [])
@@ -11,6 +9,5 @@ export const usePrevious = (value) => {
     const update = (newValue) => {
         valueRef.current = newValue
     }
-
     return {value: valueRef.current, update};
 }
