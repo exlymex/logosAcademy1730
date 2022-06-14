@@ -22,7 +22,7 @@ const UsersPage = () => {
             <SearchingPage setCurrentOption={setCurrentOption} setSearchingWord={setSearchingWord}
                            currentOption={currentOption} searchingWord={searchingWord}/>
             <div className={styles.cardContainer}>
-                {users.filter(val => {
+                {users?.filter(val => {
                     // console.log(val['username'])
                     if (searchingWord === '') {
                         return val
@@ -37,6 +37,6 @@ const UsersPage = () => {
     )
 }
 // else if(val.username.toLowerCase().includes(searchingWord.toLowerCase())){
-//     return val
+//     return valad
 // }
 export default UsersPage
